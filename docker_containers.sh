@@ -19,4 +19,16 @@ then
     echo "</item>"
   done <<< "$CONTAINERS"
 fi
+STOPPED_CONTAINERS="$(docker ps --all --filter "status=exited" --format "{{.Names}} ({{.Image}})|{{.ID}}")"
+if [ "$STOPPED_CONTAINERS" != "" ]
+then
+  while read -r CONTAINER
+  do
+    CONTAINER_ID=$(echo "$CONTAINER" | sed 's/.*|//')
+    CONTAINER_NAME=$(echo "$CONTAINER" | sed 's/|.*//')
+    echo "<item arg=\"container start '$MACHINE' '$CONTAINER_ID'\">"
+    echo "  <title>Start $CONTAINER_NAME</title>"
+    echo "</item>"
+  done <<< "$STOPPED_CONTAINERS"
+fi
 echo "</items>"
