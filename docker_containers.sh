@@ -14,7 +14,7 @@ then
     CONTAINER_NAME=$(echo "$CONTAINER" | sed 's/|.*//')
     CONTAINER_SUBTITLE=$(echo "$CONTAINER" | sed 's/.*|\(.*\)|.*/\1/')
     echo "<item arg=\"container stop '$MACHINE' '$CONTAINER_ID'\">"
-    echo "  <title>Shut down $CONTAINER_NAME</title>"
+    echo "  <title>Stop $CONTAINER_NAME</title>"
     echo "  <subtitle>$CONTAINER_SUBTITLE</subtitle>"
     echo "</item>"
   done <<< "$CONTAINERS"
